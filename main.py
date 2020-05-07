@@ -20,6 +20,9 @@ from utils.atari_environment import AtariEnvironment
 from utils.continuous_environments import Environment
 
 gym.logger.set_level(40)
+
+import wandb
+from wandb.keras import WandbCallback
  
 def parse_args(args):
     """ Parse arguments from command line input
@@ -42,6 +45,10 @@ def parse_args(args):
     parser.add_argument('--env', type=str, default='BreakoutNoFrameskip-v4',help="OpenAI Gym Environment")
     parser.add_argument('--gpu', type=int, default=0, help='GPU ID')
     #
+    parser.add_argument('--wandb', dest='wandb', action='store_true', help='Use W&B to log stats')
+    parser.add_argument('--wandb_id', type=str, help='Provide your wandb ID')
+    parser.add_argument('--wandb_project', type=str, help='Provide your wandb project name')
+    #
     parser.set_defaults(render=False)
     return parser.parse_args(args)
 
@@ -52,6 +59,8 @@ def main(args=None):
         args = sys.argv[1:]
     args = parse_args(args)
 
+    if args.wandb:
+        wandb.init(entity=args.wandb_id, project=args.wandb_project)
 
     # Environment Initialization
     if(args.is_atari):

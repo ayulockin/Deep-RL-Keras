@@ -9,6 +9,9 @@ from random import random, randrange
 from utils.memory_buffer import MemoryBuffer
 from utils.stats import gather_stats
 
+import wandb
+from wandb.keras import WandbCallback
+
 class DDQN:
     """ Deep Q-Learning Main Algorithm
     """
@@ -109,7 +112,8 @@ class DDQN:
             # score = tfSummary('score', cumul_reward)
             # summary_writer.add_summary(score, global_step=e)
             # summary_writer.flush()
-
+            if args.wandb:
+                wandb.log({'episode': e, 'score': cumul_reward})
             # print("cumul_reward: ", cumul_reward)
 
 
