@@ -20,7 +20,6 @@ from utils.atari_environment import AtariEnvironment
 from utils.continuous_environments import Environment
 
 gym.logger.set_level(40)
-os.environ['AUTOGRAPH_VERBOSITY'] = '10'
  
 def parse_args(args):
     """ Parse arguments from command line input
