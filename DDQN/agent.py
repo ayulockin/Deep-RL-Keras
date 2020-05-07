@@ -1,11 +1,11 @@
 import sys
 import numpy as np
-import keras.backend as K
+import tensorflow.keras.backend as K
 
-from keras.optimizers import Adam
-from keras.models import Model
-from keras.layers import Input, Dense, Flatten, Reshape, LSTM, Lambda
-from keras.regularizers import l2
+from tensorflow.keras.optimizers import Adam
+from tensorflow.keras.models import Model
+from tensorflow.keras.layers import Input, Dense, Flatten, Reshape, LSTM, Lambda
+from tensorflow.keras.regularizers import l2
 from utils.networks import conv_block
 
 class Agent:

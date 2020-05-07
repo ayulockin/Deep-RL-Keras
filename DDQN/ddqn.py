@@ -7,7 +7,6 @@ from .agent import Agent
 from random import random, randrange
 
 from utils.memory_buffer import MemoryBuffer
-from utils.networks import tfSummary
 from utils.stats import gather_stats
 
 class DDQN:
@@ -107,9 +106,12 @@ class DDQN:
                 results.append([e, mean, stdev])
 
             # Export results for Tensorboard
-            score = tfSummary('score', cumul_reward)
-            summary_writer.add_summary(score, global_step=e)
-            summary_writer.flush()
+            # score = tfSummary('score', cumul_reward)
+            # summary_writer.add_summary(score, global_step=e)
+            # summary_writer.flush()
+
+            # print("cumul_reward: ", cumul_reward)
+
 
             # Display score
             tqdm_e.set_description("Score: " + str(cumul_reward))

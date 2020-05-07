@@ -1,18 +1,5 @@
 import numpy as np
-import tensorflow as tf
-from keras.layers import Conv2D, MaxPooling2D
-
-def get_session():
-    """ Limit session memory usage
-    """
-    config = tf.ConfigProto()
-    config.gpu_options.allow_growth = True
-    return tf.Session(config=config)
-
-def tfSummary(tag, val):
-    """ Scalar Value Tensorflow Summary
-    """
-    return tf.Summary(value=[tf.Summary.Value(tag=tag, simple_value=val)])
+from tensorflow.keras.layers import Conv2D, MaxPooling2D
 
 def conv_layer(d, k):
     """ Returns a 2D Conv layer, with and ReLU activation

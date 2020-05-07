@@ -9,21 +9,19 @@ import numpy as np
 import pandas as pd
 import tensorflow as tf
 
-from A2C.a2c import A2C
-from A3C.a3c import A3C
+# from A2C.a2c import A2C
+# from A3C.a3c import A3C
 from DDQN.ddqn import DDQN
-from DDPG.ddpg import DDPG
+# from DDPG.ddpg import DDPG
 
-from keras.backend.tensorflow_backend import set_session
-from keras.utils import to_categorical
+from tensorflow.keras.utils import to_categorical
 
 from utils.atari_environment import AtariEnvironment
 from utils.continuous_environments import Environment
-from utils.networks import get_session
 
 gym.logger.set_level(40)
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
-
+os.environ['AUTOGRAPH_VERBOSITY'] = '10'
+ 
 def parse_args(args):
     """ Parse arguments from command line input
     """
@@ -55,11 +53,6 @@ def main(args=None):
         args = sys.argv[1:]
     args = parse_args(args)
 
-    # Check if a GPU ID was set
-    if args.gpu:
-        os.environ['CUDA_VISIBLE_DEVICES'] = args.gpu
-    set_session(get_session())
-    summary_writer = tf.summary.FileWriter(args.type + "/tensorboard_" + args.env)
 
     # Environment Initialization
     if(args.is_atari):
@@ -93,7 +86,7 @@ def main(args=None):
         algo = DDPG(action_dim, state_dim, act_range, args.consecutive_frames)
 
     # Train
-    stats = algo.train(env, args, summary_writer)
+    stats = algo.train(env, args) # e, mean, stdev: e is episode
 
     # Export results to CSV
     if(args.gather_stats):
