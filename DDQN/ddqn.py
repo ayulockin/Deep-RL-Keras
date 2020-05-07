@@ -71,7 +71,7 @@ class DDQN:
         self.epsilon *= self.epsilon_decay
 
 
-    def train(self, env, args, summary_writer):
+    def train(self, env, args):
         """ Main DDQN Training Algorithm
         """
 
