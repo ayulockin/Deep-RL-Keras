@@ -8,6 +8,9 @@ from tensorflow.keras.layers import Input, Dense, Flatten, Reshape, LSTM, Lambda
 from tensorflow.keras.regularizers import l2
 from utils.networks import conv_block
 
+import wandb
+from wandb.keras import WandbCallback
+
 class Agent:
     """ Agent Class (Network) for DDQN
     """
@@ -66,7 +69,7 @@ class Agent:
     def fit(self, inp, targ):
         """ Perform one epoch of training
         """
-        self.model.fit(self.reshape(inp), targ, epochs=1, verbose=0)
+        self.model.fit(self.reshape(inp), targ, epochs=1, verbose=0, callbacks=[WandbCallback()])
 
     def predict(self, inp):
         """ Q-Value Prediction
